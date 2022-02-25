@@ -1,4 +1,4 @@
-webbcrawl is a a simple command-line tool to recursively list the contents of a JWST data directory, usually as downloaded from the Mikulski Archive for Space Telescopes (MAST)
+photnow is a simple command line tool to quickly obtain aperture photometry of a source in a fits image. It was developed to work with JWST data, but may work with other observatories. 
 
 This software is provided as-is, with no warranty.
 
@@ -15,9 +15,9 @@ To be uploaded to pypi
 
 Basic command line usage:
 ------------------------
-webbcrawl --options path 
+photnow file x y [range] 
    
 example:
 
-webbcrawl --include_path MAST_2022-02-08T0000 
-# spew
+photnow image.fits 100 200 12 
+
