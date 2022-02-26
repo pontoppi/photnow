@@ -17,9 +17,9 @@ To be uploaded to pypi
 
 Basic command line usage:
 ------------------------
-photnow file x y [aperture] 
+photnow file x y [--radius aperture] 
    
 example:
 
-photnow image.fits 100 200 12 
+photnow image.fits 100 200 --radius 12 
 
