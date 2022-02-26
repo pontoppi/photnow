@@ -59,7 +59,7 @@ class photnow():
 
         error = stddev*np.sqrt(aperture.area)    
 
-        print(phot_vals[-1],'+/-',error)
+        print('%9.3f +/- %9.3f' % (phot_vals[-1], error))
         
         return radii, phot_vals
 
