@@ -8,7 +8,7 @@ This software is provided as-is, with no warranty.
 INSTALLATION
 
 using setup.py:
-----------
+---------------
 python setup.py install
 
 Using pip:
@@ -20,7 +20,9 @@ Basic command line usage:
 photnow file x y [--radius aperture] 
    
 examples:
+---------
 
+photnow --help
 photnow image.fits 100 200
 photnow image.fits 100 200 --radius 10 
 
