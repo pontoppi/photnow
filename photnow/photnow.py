@@ -24,14 +24,28 @@ class photnow():
         pos = (xx,yy)
 
         self.data = fits.getdata(ffpath)
+        self.hdr = fits.getheader(ffpath,1)
         
+        try:
+            self.unit = self.hdr['BUNIT']
+            cdelt1 = self.hdr['CDELT1']
+            cdelt2 = self.hdr['CDELT2']
+            self.px_area = cdelt1*cdelt2 * 3.0461741978670859934e-4 #square degree --> steradian
+        except:
+            print('Failed reading header, units are undefined')
+            self.unit = 'Unknown unit'
+            
+        #If we have units of intensity, need to convert to integral over solid angle, and to Jy (if MJy/sr)
+        if self.unit=='MJy/sr':
+            breakpoint()
+            self.scale_factor = 1e6 * self.px_area
+            self.unit = 'Jy'
+        else:
+            self.scale_factor = 1.0
+            
         radii, phot_vals = self.apphot(pos,nr,aw)
         self.plotphot(radii, phot_vals, nr, aw)
         
-        #path = '/Users/pontoppi/commissioning/data/nircam'
-        #ff = 'MAST_2022-02-23T1037/JWST/jw01144001001_04101_00002_nrcb1/jw01144001001_04101_00002_nrcb1_rate.fits'
-        #ffpath = os.path.join(path,ff)
-
     def apphot(self,pos,nr,aw):
         
         phot_vals = np.zeros(nr)
@@ -77,8 +91,9 @@ class photnow():
         ax1.add_patch(ap_patch)
         ax1.add_patch(an_patch)
 
-        ax2.step(radii, phot_vals)
+        ax2.step(radii, phot_vals * self.scale_factor)
         ax2.set_xlabel('Pixels')
+        ax2.set_ylabel(self.unit)
 
         plt.tight_layout()
         plt.show()
