@@ -23,7 +23,9 @@ examples:
 ---------
 
 photnow --help
+
 photnow image.fits 100 200
+
 photnow image.fits 100 200 --radius 10 
 
 ![Example output](https://user-images.githubusercontent.com/3697922/156459947-f69f36b0-89df-4ef0-a83c-62c80cdb3f77.png)
