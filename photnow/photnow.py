@@ -24,9 +24,9 @@ class photnow():
         pos = (xx,yy)
 
         self.data = fits.getdata(ffpath)
-        self.hdr = fits.getheader(ffpath,1)
         
         try:
+            self.hdr = fits.getheader(ffpath,1)
             self.unit = self.hdr['BUNIT']
             cdelt1 = self.hdr['CDELT1']
             cdelt2 = self.hdr['CDELT2']
@@ -37,7 +37,6 @@ class photnow():
             
         #If we have units of intensity, need to convert to integral over solid angle, and to Jy (if MJy/sr)
         if self.unit=='MJy/sr':
-            breakpoint()
             self.scale_factor = 1e6 * self.px_area
             self.unit = 'Jy'
         else:
