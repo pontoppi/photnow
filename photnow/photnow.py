@@ -37,8 +37,8 @@ class photnow():
             
         #If we have units of intensity, need to convert to integral over solid angle, and to Jy (if MJy/sr)
         if self.unit=='MJy/sr':
-            self.scale_factor = 1e6 * self.px_area
-            self.unit = 'Jy'
+            self.scale_factor = 1e9 * self.px_area
+            self.unit = 'mJy'
         else:
             self.scale_factor = 1.0
             
@@ -72,7 +72,7 @@ class photnow():
 
         error = stddev*np.sqrt(aperture.area)    
 
-        print('%9.3f +/- %9.3f' % (phot_vals[-1], error))
+        print('%9.3e +/- %9.3e %s' % (phot_vals[-1] * self.scale_factor, error * self.scale_factor, self.unit))
         
         return radii, phot_vals
 
